@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+  <title>download</title>
+  <style type="text/css">
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+      font-size: 14px;
+    }
+
+    .button-bottom {
+      padding: 15px 0;
+      width: 100%;
+      background: #fff;
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      box-shadow:
+        0px -10px 105px -10px rgba(0, 0, 0, 0.38);
+
+    }
+
+    .android-style {
+      padding: 15px 0;
+      width: 40%;
+      background: #49B87B;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 6px;
+      font-size: 20px;
+    }
+
+    .ios-style {
+      padding: 15px 0;
+      width: 40%;
+      background: #DEF3EA;
+      color: #49B87B;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 6px;
+      font-size: 20px;
+    }
+
+    .imgs {
+      width: 100%;
+    }
+
+    .box-h {
+      height: 60px;
+    }
+  </style>
+</head>
+
+<body>
+  <img class="imgs" src="./1.png">
+  <div class="box-h"></div>
+  <div class="button-bottom">
+    <div id="button_android" class="android-style">Android</div>
+    <div id="button_ios" class="ios-style">IOS</div>
+  </div>
+  <script>
+
+    let url_all = {}
+
+    function createXMLHttpRequest() {
+      xmlhttp = new XMLHttpRequest();  //这里要判断IE的写法
+    }
+    function startRequest(url) {
+      createXMLHttpRequest();
+      xmlhttp.open("GET", url, false);  //true:异步，false:同步
+      xmlhttp.onreadystatechange = handleStateChange;
+      xmlhttp.send(null);
+    }
+    function handleStateChange() {
+      if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+        var txt = xmlhttp.responseText;
+        if (txt != null && txt != "") {
+          let res = JSON.parse(txt)
+          if (res.code == 200) {
+            url_all = res.data
+          }
+        }
+      }
+    }
+
+    var button = document.getElementById("button_android")
+    button.onclick = function () {
+      window.location.href = url_all.anzhuo;
+    }
+
+    var ios_button = document.getElementById("button_ios")
+    ios_button.onclick = function () {
+      window.location.href = 'https://www.coinwindow.net/';
+    }
+    startRequest("https://www.coinwindow.net/api/software/downloadLink")
+  </script>
+</body>
+
+</html>

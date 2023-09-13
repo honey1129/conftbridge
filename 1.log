@@ -1,0 +1,9 @@
+DELETE	FROM users WHERE id>13;
+DELETE	FROM user_address;
+DELETE	FROM user_assets;
+DELETE	FROM user_money_log;
+DELETE	FROM xy_orders;
+DELETE	FROM user_entrusts;
+DELETE	FROM user_trans;
+DELETE	FROM user_positions;
+DELETE	FROM qiq_order;
